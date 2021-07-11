@@ -1,0 +1,65 @@
+body {
+    background: rgb(187, 112, 112);
+}
+h1 {
+    color: rgb(63, 1, 1);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+td {
+    border: black solid 1px;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    width: 25px;
+    height: 25px;
+}
+tr {
+    padding: 0px;
+}
+table {
+    align-content: center;
+    align-items: center;
+    align-content: center;
+    border-spacing: 0px;
+}
+div.menu {
+    width: 500px;
+    height: 50px;
+    align-content: center;
+    display: block;
+    margin-bottom: 20px;
+}
+div.menuItem {
+    height: 50px;
+    width: 10%;
+    display: inline-block;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+    border-style: solid;
+    border-color: black;
+    border-width: 3px;
+}
+.display {
+    height: 50px;
+    display: inline-block;
+    width: 15%;
+    background-color: black;
+    color: red;
+    font-size: large;
+    font-family: monospace;
+    font-style: oblique;
+    font-stretch: normal;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+    border-style: solid;
+    border-color: black;
+    border-width: 3px;
+}
+div.inner {
+    position: relative;
+    top: 30%;
+    display: inline-block;
+    width: 15%;
+}

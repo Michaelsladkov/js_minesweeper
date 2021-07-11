@@ -1,0 +1,32 @@
+div.cell {
+    height: 21px;
+    width: 21px;
+    border-width: 2.1px;
+    border-style: solid;
+    background-color: darkgray;
+    border-color: rgb(94, 94, 94);
+    display: inline-block;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    margin-top: -0.4px;
+    margin-bottom: -0.4px;
+    margin-left: -1px;
+    margin-right: -1px;
+}
+div.gameContent {
+    z-index: 1;
+    height: 21px;
+    width: 21px;
+    visibility: hidden;
+    color: black;
+    font-size: large;
+    font-family: monospace;
+    font-style: oblique;
+    font-stretch: normal;
+    display: inline-block;
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
