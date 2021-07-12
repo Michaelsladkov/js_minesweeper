@@ -31,14 +31,15 @@ div.menu {
 }
 div.menuItem {
     height: 50px;
-    width: 10%;
+    width: 20%;
     display: inline-block;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
     text-align: center;
     border-style: solid;
     border-color: black;
     border-width: 3px;
+    vertical-align: middle;
 }
 .display {
     height: 50px;
@@ -50,16 +51,23 @@ div.menuItem {
     font-family: monospace;
     font-style: oblique;
     font-stretch: normal;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 3%;
+    margin-right: 3%;
     text-align: center;
     border-style: solid;
     border-color: black;
     border-width: 3px;
+    vertical-align: middle;
 }
 div.inner {
     position: relative;
     top: 30%;
     display: inline-block;
     width: 15%;
+}
+p.inner {
+    vertical-align: middle;
+}
+#help {
+    text-align: center;
 }

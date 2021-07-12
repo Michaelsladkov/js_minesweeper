@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>The Sapper</title>
+        <title>Minesweeper</title>
         <link rel="stylesheet" href="../css/main.css">
         <link rel="stylesheet" href="../css/game.css">
         <script src="../js/generating.js"></script>
@@ -11,7 +11,7 @@
 
     <body>
         <div align = center>
-            <h1>The Sapper</h1>
+            <h1>The Minesweeper</h1>
             <h3>By Mikhail Sladkov</h3>
             <div class = menu>
                 <div class = display id = "score">
@@ -20,9 +20,7 @@
                     </div>
                 </div>
                 <div class = menuItem id = "restartButton">
-                    <div class= inner>
-                        R
-                    </div>
+                    <p class = "inner">Restart</p>
                 </div>
                 <div class = display id = "totalMines">
                     <div class= inner>
@@ -31,6 +29,9 @@
                 </div>
             </div>
             <table id = "mainTable"></table>
+            <p id = "help">
+                Use <b>left click</b> to open cell and <b>ctrl</b> to set flag
+            </p>
         </div>
     </body>
 </html>

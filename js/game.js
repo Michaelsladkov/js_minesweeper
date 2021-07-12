@@ -1,13 +1,14 @@
-
 var gameStarted = false;
 var gameFinished = false;
 const totalMines = 21;
 var helperArray;
 var flagArray;
 var cellsState;
-var flagsUsed = 0;
+var flagsUsed;
 var flagDisplay;
 var selectedCell;
+var lines;
+var columns;
 
 function prepare() {
     var restartButton = document.getElementById("restartButton");
@@ -22,6 +23,8 @@ function prepare() {
 function clear() {
     gameStarted = false;
     gameFinished = false;
+    flagsUsed = 0;
+    flagDisplay.innerHTML = flagsUsed;
     let cells = document.getElementsByTagName("td");
     for (let cell of cells) {
         cell.innerHTML = "";
@@ -31,6 +34,7 @@ function clear() {
         cellSquare.onmouseleave = function() {
             cellSquare.style.background = "";
         }
+        window.onkeydown = leftCtrlPressed;
         let separatorPosition = cell.id.indexOf(":");
         let x = cell.id.substring(0, separatorPosition);
         let y = cell.id.substring(separatorPosition+1);
@@ -41,6 +45,24 @@ function clear() {
         cellContent.className = "gameContent";
         cellContent.id = "content" + cell.id;
         cellSquare.appendChild(cellContent);
+    }
+    lines = document.getElementsByTagName("tr").length;
+    columns = document.getElementsByTagName("td").length/lines;
+    helperArray = [];
+    cellsState = [];
+    flagArray = [];
+    for (let i = 0; i < lines; i++) {
+        let row = [];
+        let stateRow = [];
+        let flagRow = [];
+        for (let j = 0; j < columns; j++) {
+            row.push(0);
+            stateRow.push(false);
+            flagRow.push(false);
+        }
+        helperArray.push(row);
+        cellsState.push(stateRow);
+        flagArray.push(flagRow);
     }
 }
 
@@ -74,29 +96,16 @@ function cellClick(eventObj) {
     check();
 }
 
-/*Creation of backing array, displacement of mines ang generation of
-numbers in cells */
-function start(startCell) {
-    let lines = document.getElementsByTagName("tr").length;
-    let columns = document.getElementsByTagName("td").length/lines;
-    helperArray = [];
-    cellsState = [];
-    flagArray = [];
-    for (let i = 0; i < lines; i++) {
-        let row = [];
-        let stateRow = [];
-        let flagRow = [];
-        for (let j = 0; j < columns; j++) {
-            row.push(0);
-            stateRow.push(false);
-            flagRow.push(false);
-        }
-        helperArray.push(row);
-        cellsState.push(stateRow);
-        flagRow.push(flagRow);
+function leftCtrlPressed(eventObj) {
+    if (eventObj.ctrlKey && gameStarted && !gameFinished) {
+        setFlag(getPoint(selectedCell));
+        redraw();
     }
+}
+
+function start(startCell) {
     let minesCounter = 0;
-    while (minesCounter < totalMines) {
+    while (minesCounter < totalMines + 1) {
         let xpos = Math.floor(Math.random() * lines);
         let ypos = Math.floor(Math.random() * columns);
         if ("cell" + xpos + ":" + ypos == startCell.id) {
@@ -161,6 +170,18 @@ function open(point) {
     }
 }
 
+function setFlag(point) {
+    let i = point[0];
+    let j = point[1];
+    if (!flagArray[i][j]) {
+        flagsUsed++;
+        flagArray[i][j] = true;
+    } else {
+        flagsUsed--;
+        flagArray[i][j] = false;
+    }
+}
+
 function getNeighbours(i ,j) {
     i = Number(i);
     j = Number(j);
@@ -185,18 +206,32 @@ function getPoint(cell) {
     return [i, j];
 }
 
-/* This function redraws cells using the backing array. I use it to separate
+/* This function redraws cells using the backing arrays. I use it to separate
 logic and view.
 */
 function redraw() {
+    flagDisplay.innerHTML = flagsUsed;
     for (let i = 0; i < cellsState.length; i++) {
         for (let j = 0; j < cellsState[i].length; j++) {
-            if (cellsState[i][j] == true) {
+            let content = document.getElementById("content" + i + ":" +j);
+            if (cellsState[i][j]) {
                 let cell = document.getElementById("cell" + i + ":" + j);
-                let content = document.getElementById("content" + i + ":" +j);
                 cell.style.visibility = "hidden";
+                if (helperArray[i][j] != -1) {
+                    content.innerHTML = helperArray[i][j];
+                }
+                else {
+                    content.innerHTML = "m";
+                }
                 content.style.visibility = "visible";
+                continue;
             }
+            if (flagArray[i][j]) {
+                content.innerHTML = "F";
+                content.style.visibility = "visible";
+                continue;
+            }
+            content.style.visibility = "hidden";
         }
     }
 }
